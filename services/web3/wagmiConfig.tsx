@@ -20,7 +20,7 @@ export const wagmiConfig = createConfig({
     let rpcFallbacks = [http()];
     const rpcOverrideUrl = (scaffoldConfig.rpcOverrides as ScaffoldConfig["rpcOverrides"])?.[chain.id];
     if (rpcOverrideUrl) {
-      rpcFallbacks = [http(rpcOverrideUrl)];
+      rpcFallbacks = [http(rpcOverrideUrl), http("https://rpc.sepolia.org")];
     } else {
       const alchemyHttpUrl = getAlchemyHttpUrl(chain.id);
       if (alchemyHttpUrl) {
