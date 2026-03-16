@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { ethers } from "ethers";
-import { useFHEDecrypt, useInMemoryStorage } from "@fhevm-sdk";
+import { useFHEDecrypt, useInMemoryStorage } from "fhevm-sdk";
 import { useReadContracts } from "wagmi";
 import { useDeployedContractInfo } from "~~/hooks/helper";
 import { useWagmiEthers } from "~~/hooks/wagmi/useWagmiEthers";

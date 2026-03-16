@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useFhevm, useFHEDecrypt, useInMemoryStorage } from "@fhevm-sdk";
+import { useFhevm, useFHEDecrypt, useInMemoryStorage } from "fhevm-sdk";
 import { useAccount, useReadContracts } from "wagmi";
 import { ethers } from "ethers";
 import { useWagmiEthers } from "~~/hooks/wagmi/useWagmiEthers";

@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { ethers } from "ethers";
-import { useFHEEncryption, toHex } from "@fhevm-sdk";
+import { useFHEEncryption, toHex } from "fhevm-sdk";
 import { notification } from "~~/utils/helper/notification";
 
 interface ReimbursementsViewProps {
