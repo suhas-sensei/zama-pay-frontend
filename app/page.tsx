@@ -48,10 +48,15 @@ export default function Home() {
   const [employerView, setEmployerView] = useState<EmployerView>("overview");
   const [employeeView, setEmployeeView] = useState<EmployeeView>("overview");
 
-  const provider = useMemo(() => {
-    if (typeof window === "undefined" || !isConnected) return undefined;
-    if (chainId === 31337) return "http://localhost:8545";
-    return (window as any).ethereum;
+  const [provider, setProvider] = useState<any>(undefined);
+  useEffect(() => {
+    if (typeof window === "undefined" || !isConnected) { setProvider(undefined); return; }
+    if (chainId === 31337) { setProvider("http://localhost:8545"); return; }
+    // For Sepolia/mainnet, request accounts first then pass provider
+    const eth = (window as any).ethereum;
+    if (eth) {
+      eth.request({ method: "eth_requestAccounts" }).then(() => setProvider(eth)).catch(() => setProvider(eth));
+    }
   }, [isConnected, chainId]);
 
   const initialMockChains = useMemo(() => ({ 31337: "http://localhost:8545" }), []);
