@@ -34,8 +34,7 @@ const scaffoldConfig = {
   // If you want to use a different RPC for a specific network, you can add it here.
   // The key is the chain ID, and the value is the HTTP RPC URL
   rpcOverrides: {
-    // Example:
-    // [chains.mainnet.id]: "https://mainnet.rpc.buidlguidl.com",
+    [chains.sepolia.id]: `https://sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_API_KEY || "04934fd79736498096f8084ec6ea3858"}`,
   },
   // This is ours WalletConnect's default project ID.
   // You can get your own at https://cloud.walletconnect.com
