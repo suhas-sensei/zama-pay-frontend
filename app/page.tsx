@@ -48,15 +48,14 @@ export default function Home() {
   const [employerView, setEmployerView] = useState<EmployerView>("overview");
   const [employeeView, setEmployeeView] = useState<EmployeeView>("overview");
 
-  const [provider, setProvider] = useState<any>(undefined);
-  useEffect(() => {
-    if (typeof window === "undefined" || !isConnected) { setProvider(undefined); return; }
-    if (chainId === 31337) { setProvider("http://localhost:8545"); return; }
-    // For Sepolia/mainnet, request accounts first then pass provider
-    const eth = (window as any).ethereum;
-    if (eth) {
-      eth.request({ method: "eth_requestAccounts" }).then(() => setProvider(eth)).catch(() => setProvider(eth));
-    }
+  const provider = useMemo(() => {
+    if (typeof window === "undefined" || !isConnected) return undefined;
+    if (chainId === 31337) return "http://localhost:8545";
+    // For Sepolia, pass the RPC URL string — the SDK uses it for read-only calls
+    // and internally connects to Zama's relayer. Passing window.ethereum causes
+    // "wallet must has at least one account" errors.
+    if (chainId === 11155111) return `https://sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_API_KEY || "04934fd79736498096f8084ec6ea3858"}`;
+    return (window as any).ethereum;
   }, [isConnected, chainId]);
 
   const initialMockChains = useMemo(() => ({ 31337: "http://localhost:8545" }), []);
